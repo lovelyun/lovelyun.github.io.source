@@ -1,8 +1,121 @@
 <!DOCTYPE html><html lang="简体中文"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="baidu-site-verification" content="1EB8XoOl0C"><meta name="google-site-verification" content="K7thEgdLm0UfRWJ5MGdF7sCcjClSzAlxFLPv2Oz5CGM"><title> Promise总结 · Lovelyun's blog</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Promise总结 - Lovelyun"><meta name="keywords" content="前端javescript node"><meta name="author" content="Lovelyun"><link rel="short icon" href="/images/favicon.ico"><link rel="stylesheet" href="/css/bubuzou.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Lovelyun's blog"></head><body><header><div class="header row"> <a href="/" class="logo-link"><img src="/images/logo.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" data-hover="博文" class="nav-list-link">博文</a></li><li class="nav-list-item"><a href="/archives/" target="_self" data-hover="归档" class="nav-list-link">归档</a></li><li class="nav-list-item"><a href="/categories/live/" target="_self" data-hover="生活" class="nav-list-link">生活</a></li><li class="nav-list-item"><a href="/about/" target="_self" data-hover="关于" class="nav-list-link">关于</a></li></ul><div class="search"><a id="search_btn" href="#search"></a></div></div></header><div class="row scroll-con"><section class="container"><!-- for archive page--><div id="postAr" class="post"><article class="post-block"><h1 class="post-title">Promise总结</h1><div class="post-info">2018-10-15<p class="visit"><i data-hk-page="current">-</i><span>次访问</span></p></div><div class="post-content"><h2 id="Promise简介"><a href="#Promise简介" class="headerlink" title="Promise简介"></a>Promise简介</h2><p>Promise 对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值。由浏览器直接支持。</p>
-<p>打开Chrome的控制台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Promise(function () &#123;&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="./PromiseSummary/promise1.png" alt="new Promise"></p>
-</div></article></div><div class="right-container"><div class="widget"><div class="category"><h4>分类归档</h4><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docs/">docs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li></ul></div></div><div class="widget"><div class="tagcloud"><h4>标签云</h4><a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a></div></div><div class="widget"><div class="recent"><h4>最近文章</h4><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/js/Promise总结/">Promise总结</a></li><li class="post-list-item"><a class="post-list-link" href="/docs/Markdown概要/">markdown概要</a></li></ul></div></div><div class="widget"><div id="arAnchorBar"></div></div></div></section></div><div class="right-menu"></div><div class="modal search-modal"><div class="input-field"><input type="text" id="search_input"><label for="search-input">搜索</label></div><div id="search_result" class="search-result"></div></div><div class="blog-overlay"></div><footer class="row"><div class="footer-con"><div class="paginator"><a href="/docs/Markdown概要/" class="next">NEXT</a></div><!--PC和WAP自适应版--><div id="SOHUCS" sid="js/Promise总结/"> </div><script>(function() {
+<p>打开Chrome的控制台:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/img/promise1.png" alt="new Promise1"></p>
+<p>总结得出：</p>
+<h3 id="Promise原型"><a href="#Promise原型" class="headerlink" title="Promise原型"></a>Promise原型</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Promise.prototype.constructor</td>
+<td style="text-align:center">返回被创建的实例函数.  默认为 Promise 函数</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Promise.prototype.catch(onRejected)</td>
+<td style="text-align:left">添加一个拒绝(rejection) 回调到当前 promise, 返回一个新的promise。</td>
+</tr>
+<tr>
+<td>Promise.prototype.finally(onFinally)</td>
+<td style="text-align:left">添加一个事件处理回调于当前promise对象，并且在原promise对象解析完毕后，返回一个新的promise对象。回调会在当前promise运行完毕后被调用，无论当前promise的状态是完成(fulfilled)还是失败(rejected)</td>
+</tr>
+<tr>
+<td>Promise.prototype.then(onFulfilled, onRejected)</td>
+<td style="text-align:left">添加解决(fulfillment)和拒绝(rejection)回调到当前 promise, 返回一个新的 promise。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Promise.length</td>
+<td style="text-align:center">值总是为 1 (构造器参数的数目)</td>
+</tr>
+<tr>
+<td>Promise.prototype</td>
+<td style="text-align:center">Promise 构造器的原型</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Promise.all(iterable)</td>
+<td style="text-align:left">常用于处理多个promise对象的状态集合</td>
+</tr>
+<tr>
+<td>Promise.race(iterable)</td>
+<td style="text-align:left">当iterable参数里的任意一个子promise被成功或失败后，父promise马上也会用子promise的成功返回值或失败详情作为参数调用父promise绑定的相应句柄，并返回该promise对象</td>
+</tr>
+<tr>
+<td>Promise.reject(reason)</td>
+<td style="text-align:left">返回一个状态为失败的Promise对象，并将给定的失败信息传递给对应的处理方法</td>
+</tr>
+<tr>
+<td>Promise.resolve(value)</td>
+<td style="text-align:left">返回一个状态由给定value决定的Promise对象。如果该值是一个Promise对象，则直接返回该对象；如果该值是thenable(即，带有then方法的对象)，返回的Promise对象的最终状态由then方法执行决定；否则的话(该value为空，基本类型或者不带then方法的对象),返回的Promise对象状态为fulfilled，并且将该value传递给对应的then方法。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><h3 id="1、resolve触发then"><a href="#1、resolve触发then" class="headerlink" title="1、resolve触发then"></a>1、resolve触发then</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">'成功!'</span>);</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then'</span>, val);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">then 成功!</span><br></pre></td></tr></table></figure>
+<h3 id="2、reject触发catch"><a href="#2、reject触发catch" class="headerlink" title="2、reject触发catch"></a>2、reject触发catch</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="string">'异常!'</span>);</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'catch'</span>, val);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">catch</span> 异常!</span><br></pre></td></tr></table></figure>
+<h3 id="3、处理-rejection"><a href="#3、处理-rejection" class="headerlink" title="3、处理 rejection"></a>3、处理 rejection</h3><p>有两种方式去处理 rejection，方式二 是 方式一 的语法糖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="string">'异常!'</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(<span class="literal">undefined</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then rejection'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="string">'异常!'</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'catch'</span>, val);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<div class="tip"><br>当 Promise 的状态变为 rejection 时，我们没有正确处理，让其一直冒泡（propagation），直至被进程捕获。这个 Promise 就被称为 unhandled promise rejection。浏览器出现Unhandled Promise Rejection Warning。<br></div>
+
+<h3 id="4、触发Promise异常"><a href="#4、触发Promise异常" class="headerlink" title="4、触发Promise异常"></a>4、触发Promise异常</h3><ul>
+<li>主动调用 reject 方法</li>
+<li>抛出异常（exception）</li>
+</ul>
+<p>上面的示例都是主动调用reject方法，此外，js语法报错等其他错误也会被动触发Promise异常</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  a = b;</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'catch'</span>, val);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">catch</span> <span class="built_in">ReferenceError</span>: b is not defined</span><br></pre></td></tr></table></figure>
+<h3 id="5、链式调用"><a href="#5、链式调用" class="headerlink" title="5、链式调用"></a>5、链式调用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">'成功1'</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then1'</span>, val);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'成功2'</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then2'</span>, val);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="string">'成功3'</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then3'</span>, val);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'成功4'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">then1 成功<span class="number">1</span></span><br><span class="line">then2 成功<span class="number">2</span></span><br><span class="line">then3 成功<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<div class="tip"><br>  注意then的返回值，链式调用时，前一个then的返回值决定后一个then的val。<br><br>  通常而言，如果你不知道一个值是否是Promise对象，使用Promise.resolve(value) 来返回一个Promise对象,这样就能将该value以Promise对象形式使用。<br></div>
+
+<h3 id="6、注意执行顺序"><a href="#6、注意执行顺序" class="headerlink" title="6、注意执行顺序"></a>6、注意执行顺序</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'javascript start'</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">  resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'javascript end'</span>);</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javascript start</span><br><span class="line">promise1</span><br><span class="line">javascript end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure>
+<h2 id="Promise实现原理"><a href="#Promise实现原理" class="headerlink" title="Promise实现原理"></a>Promise实现原理</h2><p>未完待续……</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">Promise - JavaScript | MDN</a></li>
+<li><a href="https://liyaoli.com/2017-06-26/unhandled-promise-rejection.html" target="_blank" rel="noopener">unhandled promise rejection - 不忘初心，上下求索。</a></li>
+<li><a href="https://objcer.com/2017/12/27/unhandled-promise-rejections-in-node-js/" target="_blank" rel="noopener">Node.js 中的 UnhandledPromiseRejectionWarning 问题 | Deng’s Blog</a></li>
+</ul>
+</div></article></div><div class="right-container"><div class="widget"><div class="category"><h4>分类归档</h4><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docs/">docs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li></ul></div></div><div class="widget"><div class="tagcloud"><h4>标签云</h4><a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a></div></div><div class="widget"><div class="recent"><h4>最近文章</h4><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/js/Promise总结/">Promise总结</a></li><li class="post-list-item"><a class="post-list-link" href="/docs/Markdown概要/">markdown概要</a></li></ul></div></div><div class="widget"><div id="arAnchorBar"></div></div></div></section></div><div class="right-menu"></div><div class="modal search-modal"><div class="input-field"><input type="text" id="search_input"><label for="search-input">搜索</label></div><div id="search_result" class="search-result"></div></div><div class="blog-overlay"></div><footer class="row"><div class="footer-con"><div class="paginator"><a href="/docs/Markdown概要/" class="next">下一篇</a></div><!--PC和WAP自适应版--><div id="SOHUCS" sid="js/Promise总结/"> </div><script>(function() {
     var appid = 'cyt6h19Ve'; 
     var conf = 'prod_0b4b95efa2ecfede2ddfb5adcef8c394'; 
     var width = window.innerWidth || document.documentElement.clientWidth; 
