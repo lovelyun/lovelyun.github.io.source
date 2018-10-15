@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-12T09:07:40.910Z</updated>
+  <updated>2018-10-15T07:34:35.247Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Promise总结</title>
+    <link href="http://yoursite.com/js/Promise%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/js/Promise总结/</id>
+    <published>2018-10-15T07:12:27.000Z</published>
+    <updated>2018-10-15T07:34:35.247Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Promise简介"><a href="#Promise简介" class="headerlink" title="Promise简介"></a>Promise简介</h2><p>Promise 对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值。由浏览器直接支持。</p><p>打开Chrome的控制台</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Promise(function () &#123;&#125;);</span><br></pre></td></tr></table></figure><p><img src="./PromiseSummary/promise1.png" alt="new Promise"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Promise简介&quot;&gt;&lt;a href=&quot;#Promise简介&quot; class=&quot;headerlink&quot; title=&quot;Promise简介&quot;&gt;&lt;/a&gt;Promise简介&lt;/h2&gt;&lt;p&gt;Promise 对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值。由
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
     <title>markdown概要</title>
-    <link href="http://yoursite.com/docs/markdown/"/>
-    <id>http://yoursite.com/docs/markdown/</id>
+    <link href="http://yoursite.com/docs/Markdown%E6%A6%82%E8%A6%81/"/>
+    <id>http://yoursite.com/docs/Markdown概要/</id>
     <published>2018-10-12T08:08:46.000Z</published>
-    <updated>2018-10-12T09:07:40.910Z</updated>
+    <updated>2018-10-15T07:34:45.615Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h2><hr><p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字。</p><hr><h2 id="Markdown用途"><a href="#Markdown用途" class="headerlink" title="Markdown用途"></a>Markdown用途</h2><hr><blockquote><ul><li>整理知识，学习笔记</li><li>发布日记，杂文，所见所想</li><li>撰写发布技术文稿（代码支持）</li><li>撰写发布学术论文（LaTeX 公式支持）</li></ul></blockquote><hr><h2 id="Markdown常用语法手册"><a href="#Markdown常用语法手册" class="headerlink" title="Markdown常用语法手册"></a>Markdown常用语法手册</h2><h3 id="1-斜体和粗体"><a href="#1-斜体和粗体" class="headerlink" title="1. 斜体和粗体"></a>1. 斜体和粗体</h3><p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。</p><h3 id="2-分级标题"><a href="#2-分级标题" class="headerlink" title="2. 分级标题"></a>2. 分级标题</h3><p>在行首加井号表示不同级别的标题 (H1-H6)，例如：# H1, ## H2, ### H3，#### H4</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#这是一个一级标题</span><br><span class="line"></span><br><span class="line">##这是一个二级标题</span><br><span class="line"></span><br><span class="line">### 这是一个三级标题</span><br></pre></td></tr></table></figure><h3 id="3-外链"><a href="#3-外链" class="headerlink" title="3. 外链"></a>3. 外链</h3><p>这是去往 <a href="https://lovelyun.github.io/" target="_blank" rel="noopener">本人博客</a> 的链接。</p><h3 id="4-无序列表"><a href="#4-无序列表" class="headerlink" title="4. 无序列表"></a>4. 无序列表</h3><ul><li>无序列表项 一</li><li>无序列表项 二</li></ul><h3 id="5-有序列表"><a href="#5-有序列表" class="headerlink" title="5. 有序列表"></a>5. 有序列表</h3><ol><li>有序列表项 一</li><li>有序列表项 二</li><li>有序列表项 三</li></ol><h3 id="6-文字引用"><a href="#6-文字引用" class="headerlink" title="6. 文字引用"></a>6. 文字引用</h3><blockquote><p>野火烧不尽，春风吹又生。</p></blockquote><h3 id="7-行内代码块"><a href="#7-行内代码块" class="headerlink" title="7. 行内代码块"></a>7. 行内代码块</h3><p>让我们聊聊 <code>html</code>。</p><h3 id="8-代码块"><a href="#8-代码块" class="headerlink" title="8.  代码块"></a>8.  代码块</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* nth element in the fibonacci series.</span></span><br><span class="line"><span class="comment">* @param n &gt;= 0</span></span><br><span class="line"><span class="comment">* @return the nth element, &gt;= 0.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> tmp;</span><br><span class="line">  <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    tmp = a;</span><br><span class="line">    a += b;</span><br><span class="line">    b = tmp;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.write(fib(<span class="number">10</span>));</span><br></pre></td></tr></table></figure><h3 id="9-插入图像"><a href="#9-插入图像" class="headerlink" title="9.  插入图像"></a>9.  插入图像</h3><p><img src="https://avatars0.githubusercontent.com/u/11694024?s=460&amp;v=4" alt="我的头像"></p><h3 id="10-制作一份待办事宜Todo-列表"><a href="#10-制作一份待办事宜Todo-列表" class="headerlink" title="10. 制作一份待办事宜Todo 列表"></a>10. 制作一份待办事宜Todo 列表</h3><ul><li style="list-style: none"><input type="checkbox"> 支持以 PDF 格式导出文稿</li><li style="list-style: none"><input type="checkbox" checked> 新增 Todo 列表功能</li></ul><h3 id="11-删除线"><a href="#11-删除线" class="headerlink" title="11. 删除线"></a>11. 删除线</h3><p><del>这是一段错误的文本。</del></p><h3 id="12-绘制表格"><a href="#12-绘制表格" class="headerlink" title="12. 绘制表格"></a>12. 绘制表格</h3><table><thead><tr><th>项目</th><th style="text-align:right">价格</th><th style="text-align:center">数量</th></tr></thead><tbody><tr><td>计算机</td><td style="text-align:right">$1600</td><td style="text-align:center">5</td></tr><tr><td>手机</td><td style="text-align:right">$12</td><td style="text-align:center">12</td></tr><tr><td>管线</td><td style="text-align:right">$1</td><td style="text-align:center">234</td></tr></tbody></table>]]></content>
     
