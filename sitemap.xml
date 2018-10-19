@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/docs/test%E6%B5%8B%E8%AF%95/</loc>
+    <loc>http://yoursite.com/docs/markdown%E6%A6%82%E8%A6%81/</loc>
     
-    <lastmod>2018-10-19T07:14:25.793Z</lastmod>
+    <lastmod>2018-10-19T07:26:57.520Z</lastmod>
     
   </url>
   
@@ -19,13 +19,6 @@
     <loc>http://yoursite.com/js/Promise%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2018-10-17T07:29:14.589Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/docs/markdown%E6%A6%82%E8%A6%81/</loc>
-    
-    <lastmod>2018-10-16T08:15:28.536Z</lastmod>
     
   </url>
   

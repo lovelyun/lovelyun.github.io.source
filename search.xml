@@ -3,29 +3,6 @@
   
     
     <entry>
-      <title>test测试</title>
-      <link href="/docs/test%E6%B5%8B%E8%AF%95/"/>
-      <url>/docs/test%E6%B5%8B%E8%AF%95/</url>
-      
-        <content type="html"><![CDATA[<p>测试</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> docs </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> markdown </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>javascript运算符</title>
       <link href="/js/javascript%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
       <url>/js/javascript%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
