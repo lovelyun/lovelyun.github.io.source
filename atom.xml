@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-23T09:43:40.069Z</updated>
+  <updated>2019-01-25T03:53:52.970Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo博客</title>
+    <link href="http://yoursite.com/docs/hexo%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/docs/hexo博客/</id>
+    <published>2018-11-26T02:27:32.000Z</published>
+    <updated>2019-01-25T03:53:52.970Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 博客标题</span><br></pre></td></tr></table></figure><h3 id="本地服务"><a href="#本地服务" class="headerlink" title="本地服务"></a>本地服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure><p><img src="/img/serve.png" alt="hexo serve"></p><h3 id="构建并发布"><a href="#构建并发布" class="headerlink" title="构建并发布"></a>构建并发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d // hexo generate --deploy的简写</span><br></pre></td></tr></table></figure><h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><h3 id="文章链接"><a href="#文章链接" class="headerlink" title="文章链接"></a>文章链接</h3><p>更改<code>_config.yml</code>中的下列配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">permalink: :category/:title/</span><br></pre></td></tr></table></figure><h3 id="图片资源处理"><a href="#图片资源处理" class="headerlink" title="图片资源处理"></a>图片资源处理</h3><p>放在 source/images 文件夹中。然后通过 <code>![](/images/image.jpg)</code> 的方法访问它们。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![hexo serve](/img/serve.png) // 上面hexo serve的图片写法</span><br></pre></td></tr></table></figure><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">文档 | Hexo</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;基本操作&quot;&gt;&lt;a href=&quot;#基本操作&quot; class=&quot;headerlink&quot; title=&quot;基本操作&quot;&gt;&lt;/a&gt;基本操作&lt;/h2&gt;&lt;h3 id=&quot;写博客&quot;&gt;&lt;a href=&quot;#写博客&quot; class=&quot;headerlink&quot; title=&quot;写博客&quot;&gt;&lt;/a&gt;写博
+      
+    
+    </summary>
+    
+      <category term="docs" scheme="http://yoursite.com/categories/docs/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>git常用操作</title>

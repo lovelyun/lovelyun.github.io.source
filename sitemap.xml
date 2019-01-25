@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/docs/hexo%E5%8D%9A%E5%AE%A2/</loc>
+    
+    <lastmod>2019-01-25T03:53:52.970Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/git/git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
     
     <lastmod>2018-11-23T09:43:40.069Z</lastmod>
