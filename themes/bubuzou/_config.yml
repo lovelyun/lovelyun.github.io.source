@@ -1,0 +1,29 @@
+menu:
+    博文: /
+    归档: /archives/
+
+widgets:
+- category
+- tag
+- tagcloud
+- archive
+
+# count
+show_count: true
+favicon: /images/favicon.ico
+logo: /images/logo.jpg
+
+# Comment
+changyan: bubuzou
+yungentie:
+disqus:
+duoshuo:
+
+
+# Analytics
+# google-analytics:
+ga: UA-65933410-1
+
+# Copyright Infomation
+startyear: 2018
+
