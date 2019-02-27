@@ -59,8 +59,43 @@ ssh-keygen -t rsa -C "zhengyun2@wps.cn"
 cat ~/.ssh/id_rsa.pub
 
 #验证是否添加成功
-ssh -T ssh -T git@wpsgit.kingsoft.net
+ssh -T git@wpsgit.kingsoft.net
 #Welcome to GitLab, 郑云! // 成功会出现这行欢迎
+```
+
+### 多个ssh-key的管理
+假设你已经完成了上面的步骤，现在要给github添加一个用户和ssh-key。
+
+```bash
+#生成公钥
+ssh-keygen -t rsa -C "zlovelyun@gmail.com"
+```
+![creat-sshkey](/img/creat-sshkey.png)
+
+现在进入.ssh目录，比如我的电脑用户名是win，我的目录就是`C:\Users\win\.ssh`，把刚刚生成的id_rsa_github和id_rsa_github.pub都放进来。
+新建config文件，内容如下：
+
+```bash
+Host github.com
+  HostName github.com
+  IdentityFile C:\\Users\\win\\.ssh\\id_rsa_github
+  PreferredAuthentications publickey
+  User zlovelyun@gmail.com
+```
+
+现在.ssh目录结构如下：
+![ssh](/img/ssh.png)
+
+现在本地都配置完毕，去github添加刚刚生成的id_rsa_github.pub。下面验证ssh-key是否都添加成功：
+![sshkey-check](/img/sshkey-check.png)
+
+因为有多个用户了，上面的.gitconfig全局配置了用户信息。那么在特殊项目，就需要局部设置用户信息：
+
+```bash
+#局部配置，优先使用局部配置,如果没有局部配置，默认用全局配置
+cd ~/workspace/github_project/
+git config user.name 'zlovelyun'
+git config user.email 'zlovelyun@gmail.com'
 ```
 
 ### 解决LF和CRLF问题
