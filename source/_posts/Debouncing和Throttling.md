@@ -78,27 +78,27 @@ $(document).ready(function(){
   var $statusAjax = $('.status-ajax');
   var intervalId;
 
-  // Fake ajax request. Just for demo
+  // 仅为示例模拟的假ajax
   function make_ajax_request(e){
     var that = this;
-    $statusAjax.html('That\'s enough waiting. Making now the ajax request');
+    $statusAjax.html('等待时间足够了，现在进行数据请求');
 
     intervalId = setTimeout(function(){
-       $statusKey.html('Type here. I will detect when you stop typing');
+       $statusKey.html('在这里输入，当你停止输入的时候我会发现');
        $statusAjax.html('');
-       $(that).val(''); // empty field
+       $(that).val(''); // 清空输入值
     },2000);
   }
 
-  // Event handlers to show information when events are being emitted
+  // 当事件被触发时显示信息
   $('.autocomplete')
   .on('keydown', function (){
-    $statusKey.html('Waiting for more keystrokes... ');
+    $statusKey.html('等待后续输入... ');
     clearInterval(intervalId);
   })
 
-  // Display when the ajax request will happen (after user stops typing)
-  // Exagerated value of 1.2 seconds for demo purposes, but in a real example would be better from 50ms to 200ms
+  // 显示数据请求什么时候会发生（停止输入后）
+  // 为了示例更明显，设置了超长的1.3s等待时长。实际情况下最好等待50ms到200ms
   $('.autocomplete').on('keydown', _.debounce(make_ajax_request, 1300));
 });
 ```
@@ -117,12 +117,12 @@ lodash include = debounce, throttle
 一个常见的坑是不止1次的调用`_.debounce`函数：
 
 ```javascript
-// WRONG
+// 错误的写法
 $(window).on('scroll', function() {
    _.debounce(doSomething, 300);
 });
 
-// RIGHT
+// 正确的写法
 $(window).on('scroll', _.debounce(doSomething, 200));
 ```
 
@@ -132,7 +132,7 @@ $(window).on('scroll', _.debounce(doSomething, 200));
 var debounced_version = _.debounce(doSomething, 200);
 $(window).on('scroll', debounced_version);
 
-// If you need it
+// 如果有需要
 debounced_version.cancel();
 ```
 
