@@ -13,7 +13,7 @@ FLIP本质上是一个原则，而不是框架或库。这是一种思考动画�
 
 ## 基本概念
 一般动画直接开始后，在每帧可能做开销大的计算，而这里我们让动画从头开始，动态的重新计算动效属性，然后让浏览器简单的执行渲染。
-FLPI代表First,Last,Invert.Play。
+FLIP代表First,Last,Invert.Play。
 * First: 元素涉及到动效的初值状态
 * Last: 元素的最终状态
 * Invert: 指出从动画开始到结束元素要如何变化，比如`width`、`height`、`opacity`。然后用`transform`、`opacity`来反向设置。如果元素从开始到结束下移了90px，你就要应用`transformY(-90px)`，让元素看起来和开始时一样，虽然实际上不是。
