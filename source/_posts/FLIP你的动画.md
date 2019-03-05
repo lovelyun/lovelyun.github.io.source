@@ -1,8 +1,8 @@
 ---
 title: FLIP你的动画
 date: 2019-03-04 11:34:01
-tags: CSS 译文
-categories: CSS
+tags: CSS译文
+categories: css
 ---
 
 网页中的动效应该运行在60fps，达到这个帧率并不容易，它去取决于你做了多大的尝试，这里我将用FLIP来帮助你。

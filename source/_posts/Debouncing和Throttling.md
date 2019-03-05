@@ -1,7 +1,7 @@
 ---
 title: Debouncing和Throttling
 date: 2019-02-27 15:47:44
-tags: js
+tags: js译文
 categories: js
 ---
 
