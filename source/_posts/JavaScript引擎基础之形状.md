@@ -233,4 +233,7 @@ point.z = 6;
 ![shapetable-2](/img/shapetable-2.svg)
 
 等一下，现在我们回到了字典查找……这是我们开始添加形状之前的位置!那么我们为什么还要为形状而烦恼呢？
-这就是形状可以用内联缓存优化的原因。
+这就是形状可以用内联缓存优化的原因(内联缓存见后续文章)。
+
+## 参考
+* [JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynen](https://mathiasbynens.be/notes/shapes-ics)
