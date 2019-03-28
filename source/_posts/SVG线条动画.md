@@ -1,7 +1,8 @@
 ---
 title: SVG线条动画
 date: 2019-03-25 18:01:57
-tags:
+tags: 动画
+categories: 动画
 ---
 
 ## SVG线条动画原理
