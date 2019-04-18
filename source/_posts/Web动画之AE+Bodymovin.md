@@ -67,3 +67,121 @@ npm install lottie-web
 2、开发成本低，只需要一次开发周期，后面只需要设计提供素材（json格式的动画数据文件和最好没有的静态图片），运营直接上传。
 
 简单说，活动图可以做大做多了。这将直接提升用户交互率。
+
+## 应用
+最近终于应用在业务中了，做了一个童话故事的活动，依托之前的html吊牌业务，不需要后端配合。设计输出资源的目录结构是这样的：
+.
+├── images
+│   ├── img_0.png
+│   ├── img_1.png
+│   ├── img_2.png
+│   ├── ...
+├── demo.html
+├── lottie.js
+└── data.json
+
+有3个问题导致不能直接布署：
+1、资源太大；
+2、目录结构不方便上传CDN；
+3、动画尺寸未设置，默认是100%。
+
+### 资源大小问题
+由于不完全是矢量图的设计，所以有images图片资源，直接点击demo.html就可以看到效果。但是设计直接导出的资源比较大，主要有以下几点原因：
+
+1、lottie.js未压缩，直接内嵌在html里面，有243k,如果选择官网CDN的[lottie_svg.min.js](https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.1/lottie_svg.min.js)就只有48k，不过公司的CDN只能压缩到62k。
+2、data.json也直接内嵌到html里面，但把json文件放到CDN上用gzip压缩后，只有2k。
+
+把demo.html里的lottie.js和data.json代码删除，用CDN加载lottie_svg.min.js和data.json。通过webpack压缩后的demo.html文件只有577字节。
+
+### 目录结构问题
+为了方便发布到CDN，改变了目录结构
+.
+├── img_0.png
+├── img_1.png
+├── ...
+├── img_8.png
+├── demo.html
+└── data.json
+
+需要把data.json里的图片资源路径改一下，assets里面的u代表图片资源路径。
+
+```json
+// 原来是这样的
+"assets": [{
+  "id": "image_0",
+  "w": 66,
+  "h": 55,
+  "u": "images/",
+  "p": "img_0.png",
+  "e": 0
+}]
+// 改成下面这样
+"assets": [{
+  "id": "image_0",
+  "w": 66,
+  "h": 55,
+  "u": "",
+  "p": "img_0.png",
+  "e": 0
+}]
+```
+
+### 动画尺寸问题
+修改`#lottie`的`width`和`height`。
+
+### 完整示例
+示例使用官方CDN，实际使用的是公司CDN资源。
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8">
+<head>
+    <style>
+        body{
+            margin: 0px;
+            height: 100%;
+            overflow: hidden;
+        }
+        #lottie{
+            width:280px;
+            height:300px;
+            display:block;
+            overflow: hidden;
+            transform: translate3d(0,0,0);
+            text-align: center;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.1/lottie_svg.min.js" type="text/javascript"></script>
+<div id="lottie"></div>
+
+<script>
+    var params = {
+        container: document.getElementById('lottie'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'data.json'
+    };
+
+    var anim;
+
+    anim = lottie.loadAnimation(params);
+
+</script>
+</body>
+</html>
+
+```
+
+### 应用总结
+
+1、资源大小
+输出的webp格式动图接近2M。
+这种方式就小了很多，库文件lottie_svg.min.js有63k，data.json有2k，html不到1k，所有的图片资源96.1k,不过不知道为什么图片资源会加载2次，造成了192.2k的图片资源流量。不过总体来说63+2+1+192.2=258.2k，是远小于2M的，只有原来的12.6%的大小，相当于节约了87.4%的流量。
+
+2、开发效率高
+设计输出动效资源，开发处理下上面列过的3个问题点就可以直接布署了，动效细节完美实现。
