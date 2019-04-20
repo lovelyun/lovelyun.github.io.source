@@ -186,6 +186,10 @@ lia自动生成的雪碧图还可以再压缩的哦
 | 图片流量 |258.2k|68.4k|
 | 请求次数 |18|1|
 
+<div class="tip">
+本文修改的是lottie-web-5.5.0版本的lottie_svg.js源码
+</div>
+
 ## 参考
 
 * [lottie-web-sprite](https://github.com/newbieYoung/lottie-web-sprite)
