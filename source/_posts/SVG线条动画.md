@@ -2,7 +2,7 @@
 title: SVG线条动画
 date: 2019-03-25 18:01:57
 tags: 动画
-categories: 动画
+categories: animation
 ---
 
 ## SVG线条动画原理
