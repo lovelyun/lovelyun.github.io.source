@@ -5,20 +5,7 @@ tags: 动画
 categories: animation
 ---
 
-## 需求背景
-做一个故宫相关的活动，有3个图片素材要动态配置到页面中。其中有两个是动图，最大的超过1M。
-
-## 业务背景
-要实现上面的需求，现在的业务框架支持这么做：
-1、设计提供素材图片，由于有动图，为了缩小图片大小，从原来的gif改成webp，不过依然很大；
-2、运营从后台管理页面上传3个图片素材；
-3、服务端将对应的素材地址返回给前端；
-4、前端通过服务端给的地址实时获取图片资源，从而出现流量的一系列问题。
-
-## AE+Bodymovin调研
-为了解决上面出现的流量问题，我调研了AE+Bodymovin的动效模式。
-
-### AE+Bodymovin简介
+## AE+Bodymovin简介
 设计通过AE设计动效，安装Bodymovin插件后，直接导出js或者json数据给前端。前端利用设计提供的动画数据即可实现动效。
 
 ### 设计
@@ -60,14 +47,8 @@ npm install lottie-web
 请看[demo](https://codepen.io/collection/nVYWZR/)。
 请看[官方文档](https://github.com/airbnb/lottie-web?tdsourcetag=s_pctim_aiomsg)。
 
-### 产品
-1、可以较低成本配置小动图（比如，故宫活动最大的图有1M，现在只需要库文件48.3k和json文件，json文件一般不超过200k），由于数据大多是矢量数据，所以活动图可以做大却没有增加流量，相比之前图的大小，同样的流量可以做更多的图。
-2、开发成本低。
-
-简单说，活动图可以做大做多了。这将直接提升用户交互率。
-
 ## 应用
-最近终于应用在业务中了，做了一个童话故事的活动，依托之前的html吊牌业务，不需要后端配合。设计输出资源的目录结构是这样的：
+设计输出资源的目录结构是这样的：
 .
 ├── images
 │   ├── img_0.png
@@ -128,7 +109,7 @@ npm install lottie-web
 修改`#lottie`的`width`和`height`。
 
 ### 完整示例
-示例使用官方CDN，实际使用的是公司CDN资源。
+本示例`lottie_svg.min.js`使用官方CDN，实际使用的是公司CDN资源。
 
 ```html
 <html xmlns="http://www.w3.org/1999/xhtml">
