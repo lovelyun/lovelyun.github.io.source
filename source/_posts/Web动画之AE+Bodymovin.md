@@ -1,7 +1,7 @@
 ---
 title: Web动画之AE+Bodymovin
 date: 2019-03-28 10:46:58
-tags: 动画
+tags: animation
 categories: animation
 ---
 

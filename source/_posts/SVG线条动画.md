@@ -1,7 +1,7 @@
 ---
 title: SVG线条动画
 date: 2019-03-25 18:01:57
-tags: 动画
+tags: animation
 categories: animation
 ---
 

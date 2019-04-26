@@ -1,9 +1,11 @@
 ---
 title: JavaScript引擎基础之形状
 date: 2019-03-11 10:50:56
-tags: js译文
+tags: js
 categories: js
 ---
+
+> 本文译自[JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynen](https://mathiasbynens.be/notes/shapes-ics)
 
 本文描述了所有JavaScript引擎共有的一些关键基础，不仅仅是作者所研究的V8引擎。作为JavaScript开发者，深入理解JavaScript引擎的工作方式，会帮助你推断代码的性能。
 
@@ -234,6 +236,3 @@ point.z = 6;
 
 等一下，现在我们回到了字典查找……这是我们开始添加形状之前的位置!那么我们为什么还要为形状而烦恼呢？
 这就是形状可以用内联缓存优化的原因(内联缓存见后续文章)。
-
-## 参考
-* [JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynen](https://mathiasbynens.be/notes/shapes-ics)

@@ -1,9 +1,11 @@
 ---
 title: JavaScript引擎基础之内联缓存
 date: 2019-03-25 16:55:51
-tags: js译文
+tags: js
 categories: js
 ---
+
+> 本文译自[JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynen](https://mathiasbynens.be/notes/shapes-ics)
 
 形状背后的主要推动力是内联缓存（Inline Caches）或ICs的概念。ICs是让JavaScript快速运行的关键因素！JavaScript引擎使用ICs来记住去哪里寻找对象的属性，从而减少昂贵的查找次数。
 
@@ -76,6 +78,3 @@ const array = Object.defineProperty(
 
 * 始终以相同的方式初始化对象，这样它们就不会有不同的形状
 * 不要打乱数组元素的默认值，这样可以有效地存储和操作它们
-
-## 参考
-* [JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynen](https://mathiasbynens.be/notes/shapes-ics)

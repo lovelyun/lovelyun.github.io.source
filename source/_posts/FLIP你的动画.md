@@ -1,7 +1,7 @@
 ---
 title: FLIP你的动画
 date: 2019-03-04 11:34:01
-tags: CSS译文
+tags: animation
 categories: animation
 ---
 

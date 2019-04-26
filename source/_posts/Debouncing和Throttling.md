@@ -1,9 +1,11 @@
 ---
 title: Debouncing和Throttling
 date: 2019-02-27 15:47:44
-tags: js译文
+tags: js
 categories: js
 ---
+
+> 本文译自[Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/)
 
 本文出自David Corbacho，一名伦敦的前端工程师。
 
@@ -240,6 +242,3 @@ rAF的一个更好的例子我在[headroom.js](https://github.com/WickyNilliams/
 | debounce |把突然爆发的大量事件（比如连续快速的按键输入）组合成1个事件|
 | throttle |保证每X毫秒执行1次的持续的事件流。比如每200ms检查下滚动位置来触发CSS动效|
 | requestAnimationFrame |代替throttle。当你在屏幕上重新计算并渲染元素，想保证变化或动效的流畅时使用。注意：不支持IE9|
-
-## 参考
-* [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/)
