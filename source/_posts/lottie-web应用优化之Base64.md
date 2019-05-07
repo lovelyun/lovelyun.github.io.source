@@ -59,8 +59,8 @@ Electron 是一个使用 JavaScript, HTML 和 CSS 等 Web 技术创建原生程�
 
 
 <div class="tip">
-1、注意本地文件相对路径的写法，需要用path来拼接，如果直接写相对路径，在打包后相对路径发生变化会导致文件找不到
-2、重写，复制等文件操作其实主要就是node fs文件系统的读和写，必要的时候做一个格式转换。
+<p>1、注意本地文件相对路径的写法，需要用path来拼接，如果直接写相对路径，在打包后相对路径发生变化会导致文件找不到</p>
+<p>2、重写，复制等文件操作其实主要就是node fs文件系统的读和写，必要的时候做一个格式转换。</p>
 </div>
 
 `static/index.html`是index.html的模版文件，主要是删除设计输出的demo.html文件的多余信息，lottie库通过script引入而不是直接在html中，animationData置空，生成的时候会重写。
