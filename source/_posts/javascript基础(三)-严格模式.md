@@ -1,5 +1,5 @@
 ---
-title: javascript基础之严格模式
+title: javascript基础(三)-严格模式
 date: 2019-05-07 15:36:32
 tags: js
 categories: js

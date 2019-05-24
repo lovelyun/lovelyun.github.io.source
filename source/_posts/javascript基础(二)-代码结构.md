@@ -1,5 +1,5 @@
 ---
-title: javascript基础之代码结构
+title: javascript基础(二)-代码结构
 date: 2019-05-07 14:46:23
 tags: js
 categories: js

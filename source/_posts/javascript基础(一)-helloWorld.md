@@ -1,5 +1,5 @@
 ---
-title: javascript基础之helloWorld
+title: javascript基础(一)-helloWorld
 date: 2019-05-07 11:58:56
 tags: js
 categories: js
