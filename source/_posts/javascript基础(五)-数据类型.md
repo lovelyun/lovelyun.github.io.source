@@ -60,6 +60,7 @@ alert( "not a number" / 2 + 5 ); // NaN
 <b>数学运算是安全的</b>
 JavaScript中数学运算是安全的，我们可以做任何事：除以0，把非数字的字符串当成数字等等。脚本不会因为致命错误中断。最坏情况下，我们会得到NaN。
 </div>
+
 特殊的数值正式属于“number”类型。当然，在大众认知中它们不是数字。
 在[Number](https://javascript.info/number)章节中我们会学详细讨论数字类型。
 
