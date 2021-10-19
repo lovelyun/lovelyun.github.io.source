@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="简体中文"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="baidu-site-verification" content="1EB8XoOl0C"><meta name="google-site-verification" content="K7thEgdLm0UfRWJ5MGdF7sCcjClSzAlxFLPv2Oz5CGM"><title> 前端使用openCV处理图片的基础 · Lovelyun's blog</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="前端使用openCV处理图片的基础 - Lovelyun"><meta name="keywords" content="前端javescript node"><meta name="author" content="Lovelyun"><link rel="short icon" href="/images/favicon.ico"><link rel="stylesheet" href="/css/bubuzou.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Lovelyun's blog"></head><body><header><div class="header row"> <a href="/" class="logo-link"><img src="/images/logo.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" data-hover="博文" class="nav-list-link">博文</a></li><li class="nav-list-item"><a href="/archives/" target="_self" data-hover="归档" class="nav-list-link">归档</a></li></ul><div class="search"><a id="search_btn" href="#search"></a></div></div></header><div class="row scroll-con"><section class="container"><!-- for archive page--><div id="postAr" class="post"><article class="post-block"><h1 class="post-title">前端使用openCV处理图片的基础</h1><div class="post-info">2021-10-15<p class="visit"><i data-hk-page="current">-</i><span>次访问</span></p></div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://lovelyun.github.io/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/openCV/" target="_blank" rel="noopener">前文</a>我们讲了openCV如何在前端应用。<br>本文主要根据官方文档的<a href="https://docs.opencv.org/4.5.4/d1/d78/tutorial_js_table_of_contents_core.html" target="_blank" rel="noopener">Core Operations</a>部分，带大家了解OpenCV图片处理时需要的一些基础知识，比如mat数据类型的操作，绘制形状等等。</p>
+<h2 id="获取图片属性"><a href="#获取图片属性" class="headerlink" title="获取图片属性"></a>获取图片属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> src = cv.imread(<span class="string">'imageUpload'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'image width: '</span> + src.cols + <span class="string">'\n'</span> +</span><br><span class="line">            <span class="string">'image height: '</span> + src.rows + <span class="string">'\n'</span> +</span><br><span class="line">            <span class="string">'image size: '</span> + src.size().width + <span class="string">'*'</span> + src.size().height + <span class="string">'\n'</span> +</span><br><span class="line">            <span class="string">'image depth: '</span> + src.depth() + <span class="string">'\n'</span> +</span><br><span class="line">            <span class="string">'image channels '</span> + src.channels() + <span class="string">'\n'</span> +</span><br><span class="line">            <span class="string">'image type: '</span> + src.type() + <span class="string">'\n'</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/img/opencv/effect-original.avif" alt="effect-original.avif"></p>
+<p>比如上面这张图的属性打印出来就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">image width: 600</span><br><span class="line">image height: 473</span><br><span class="line">image size: 600*473</span><br><span class="line">image depth: 0</span><br><span class="line">image channels 4</span><br><span class="line">image type: 24</span><br></pre></td></tr></table></figure>
+<h2 id="Mat"><a href="#Mat" class="headerlink" title="Mat"></a>Mat</h2><h3 id="构造Mat"><a href="#构造Mat" class="headerlink" title="构造Mat"></a>构造Mat</h3><p>创建Mat实例时，可以传入<code>size, type</code>或者<code>rows, cols, type</code>，一般用默认构造方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mat = <span class="keyword">new</span> cv.Mat();</span><br></pre></td></tr></table></figure>
+<p>或者用数组来构建：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如: let mat = cv.matFromArray(2, 2, cv.CV_8UC1, [1, 2, 3, 4]);</span></span><br><span class="line"><span class="keyword">let</span> mat = cv.matFromArray(rows, cols, type, array);</span><br></pre></td></tr></table></figure>
+<p>或者用imgData：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"><span class="keyword">let</span> imgData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line"><span class="keyword">let</span> mat = cv.matFromImageData(imgData);</span><br></pre></td></tr></table></figure>
+<p>另外，还有3个静态函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建一个全是0的Mat</span></span><br><span class="line"><span class="keyword">let</span> mat = cv.Mat.zeros(rows, cols, type);</span><br><span class="line"><span class="comment">// 2. 创建一个全是1的Mat</span></span><br><span class="line"><span class="keyword">let</span> mat = cv.Mat.ones(rows, cols, type);</span><br><span class="line"><span class="comment">// 3. 创建一个单位矩阵的Mat</span></span><br><span class="line"><span class="keyword">let</span> mat = cv.Mat.eye(rows, cols, type);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>Mat实例一定记得要及时删除</li>
+</ul>
+</blockquote>
+<h3 id="复制Mat"><a href="#复制Mat" class="headerlink" title="复制Mat"></a>复制Mat</h3><p>有2种复制方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Clone</span></span><br><span class="line"><span class="keyword">let</span> dst = src.clone();</span><br><span class="line"><span class="comment">// 2. CopyTo</span></span><br><span class="line">src.copyTo(dst, mask);</span><br></pre></td></tr></table></figure>
+<h3 id="转换Mat类型"><a href="#转换Mat类型" class="headerlink" title="转换Mat类型"></a>转换Mat类型</h3><p><code>src.convertTo(dst, rtype)</code><br>rtype代表期望的输出矩阵类型，或者说是深度，因为通道的数量与输入相同;如果rtype为负，输出矩阵的类型将与输入矩阵的相同。</p>
+<h2 id="读写像素"><a href="#读写像素" class="headerlink" title="读写像素"></a>读写像素</h2><h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>首先，需要了解不同的Data属性在不同语言中的type之间的关系：</p>
+<table>
+<thead>
+<tr>
+<th>Data属性</th>
+<th>C++ Type</th>
+<th>JavaScript Typed Array</th>
+<th>Mat Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>uchar</td>
+<td>Uint8Array</td>
+<td>CV_8U</td>
+</tr>
+<tr>
+<td>data8S</td>
+<td>char</td>
+<td>Int8Array</td>
+<td>CV_8S</td>
+</tr>
+<tr>
+<td>data16U</td>
+<td>ushort</td>
+<td>Uint16Array</td>
+<td>CV_16U</td>
+</tr>
+<tr>
+<td>data16S</td>
+<td>short</td>
+<td>Int16Array</td>
+<td>CV_16S</td>
+</tr>
+<tr>
+<td>data32S</td>
+<td>int</td>
+<td>Int32Array</td>
+<td>CV_32S</td>
+</tr>
+<tr>
+<td>data32F</td>
+<td>float</td>
+<td>Float32Array</td>
+<td>CV_32F</td>
+</tr>
+<tr>
+<td>data64F</td>
+<td>double</td>
+<td>Float64Array</td>
+<td>CV_64F</td>
+</tr>
+</tbody>
+</table>
+<p>通过data获取像素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> row = <span class="number">3</span>, col = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">let</span> src = cv.imread(<span class="string">"canvasInput"</span>);</span><br><span class="line"><span class="keyword">if</span> (src.isContinuous()) &#123;</span><br><span class="line">    <span class="keyword">let</span> index = row * src.cols * src.channels() + col * src.channels()</span><br><span class="line">    <span class="keyword">let</span> R = src.data[index];</span><br><span class="line">    <span class="keyword">let</span> G = src.data[index + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> B = src.data[index + <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> A = src.data[index + <span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>data操作只对连续的Mat有效，使用前应该用<code>isContinuous</code>函数检查。</li>
+</ul>
+</blockquote>
+<h3 id="at"><a href="#at" class="headerlink" title="at"></a>at</h3><table>
+<thead>
+<tr>
+<th>Mat Type</th>
+<th>At 操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CV_8U</td>
+<td>ucharAt</td>
+</tr>
+<tr>
+<td>CV_8S</td>
+<td>charAt</td>
+</tr>
+<tr>
+<td>CV_16U</td>
+<td>ushortAt</td>
+</tr>
+<tr>
+<td>CV_16S</td>
+<td>shortAt</td>
+</tr>
+<tr>
+<td>CV_32S</td>
+<td>intAt</td>
+</tr>
+<tr>
+<td>CV_32F</td>
+<td>floatAt</td>
+</tr>
+<tr>
+<td>CV_64F</td>
+<td>doubleAt</td>
+</tr>
+</tbody>
+</table>
+<p>通过at获取像素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> row = <span class="number">3</span>, col = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">let</span> src = cv.imread(<span class="string">"canvasInput"</span>);</span><br><span class="line"><span class="keyword">let</span> colIndex = col * src.channels()</span><br><span class="line"><span class="keyword">let</span> R = src.ucharAt(row, colIndex);</span><br><span class="line"><span class="keyword">let</span> G = src.ucharAt(row, colIndex + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> B = src.ucharAt(row, colIndex + <span class="number">2</span>);</span><br><span class="line"><span class="keyword">let</span> A = src.ucharAt(row, colIndex + <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>at操作只能读，不能写。</li>
+</ul>
+</blockquote>
+<h3 id="ptr"><a href="#ptr" class="headerlink" title="ptr"></a>ptr</h3><table>
+<thead>
+<tr>
+<th>Mat Type</th>
+<th>Ptr 操作</th>
+<th>JavaScript Typed Array</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CV_8U</td>
+<td>ucharPtr</td>
+<td>Uint8Array</td>
+</tr>
+<tr>
+<td>CV_8S</td>
+<td>charPtr</td>
+<td>Int8Array</td>
+</tr>
+<tr>
+<td>CV_16U</td>
+<td>ushortPtr</td>
+<td>Uint16Array</td>
+</tr>
+<tr>
+<td>CV_16S</td>
+<td>shortPtr</td>
+<td>Int16Array</td>
+</tr>
+<tr>
+<td>CV_32S</td>
+<td>intPtr</td>
+<td>Int32Array</td>
+</tr>
+<tr>
+<td>CV_32F</td>
+<td>floatPtr</td>
+<td>Float32Array</td>
+</tr>
+<tr>
+<td>CV_64F</td>
+<td>doublePtr</td>
+<td>Float64Array</td>
+</tr>
+</tbody>
+</table>
+<p><code>mat.ucharPtr(k)</code>获取mat的第k行，<code>mat.ucharPtr(i, j)</code>获取mat的第i行第j列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> row = <span class="number">3</span>, col = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">let</span> src = cv.imread(<span class="string">"canvasInput"</span>);</span><br><span class="line"><span class="keyword">let</span> pixel = src.ucharPtr(row, col);</span><br><span class="line"><span class="keyword">let</span> R = pixel[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> G = pixel[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> B = pixel[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> A = pixel[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="颜色通道操作"><a href="#颜色通道操作" class="headerlink" title="颜色通道操作"></a>颜色通道操作</h3><p>有时我们需要单独操作图片的R/G/B通道，这时就需要对颜色通道进行分割，处理完毕后再合并。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> src = cv.imread(<span class="string">"canvasInput"</span>);</span><br><span class="line"><span class="keyword">let</span> rgbaPlanes = <span class="keyword">new</span> cv.MatVector();</span><br><span class="line"><span class="comment">// 分割</span></span><br><span class="line">cv.split(src, rgbaPlanes);</span><br><span class="line"><span class="comment">// 获取R通道</span></span><br><span class="line"><span class="keyword">let</span> R = rgbaPlanes.get(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 合并</span></span><br><span class="line">cv.merge(rgbaPlanes, src);</span><br><span class="line">src.delete(); rgbaPlanes.delete(); R.delete();</span><br></pre></td></tr></table></figure>
+<h2 id="坐标点Point"><a href="#坐标点Point" class="headerlink" title="坐标点Point"></a>坐标点Point</h2><p>有2种方式创建一个点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> point = <span class="keyword">new</span> cv.Point(x, y);</span><br><span class="line"><span class="keyword">let</span> point = &#123;<span class="attr">x</span>: x, <span class="attr">y</span>: y&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="像素点Scalar"><a href="#像素点Scalar" class="headerlink" title="像素点Scalar"></a>像素点Scalar</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> scalar = <span class="keyword">new</span> cv.Scalar(R, G, B, Alpha);</span><br><span class="line"><span class="keyword">let</span> scalar = [R, G, B, Alpha];</span><br></pre></td></tr></table></figure>
+<h2 id="尺寸Size"><a href="#尺寸Size" class="headerlink" title="尺寸Size"></a>尺寸Size</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> size = <span class="keyword">new</span> cv.Size(width, height);</span><br><span class="line"><span class="keyword">let</span> size = &#123;<span class="attr">width</span> : width, <span class="attr">height</span> : height&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="圆"><a href="#圆" class="headerlink" title="圆"></a>圆</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> cv.Circle(center, radius);</span><br><span class="line"><span class="keyword">let</span> circle = &#123;<span class="attr">center</span> : center, <span class="attr">radius</span> : radius&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="方形"><a href="#方形" class="headerlink" title="方形"></a>方形</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rect = <span class="keyword">new</span> cv.Rect(x, y, width, height);</span><br><span class="line"><span class="keyword">let</span> rect = &#123;<span class="attr">x</span> : x, <span class="attr">y</span> : y, <span class="attr">width</span> : width, <span class="attr">height</span> : height&#125;;</span><br></pre></td></tr></table></figure>
+<p>带旋转角度的方形：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rotatedRect = <span class="keyword">new</span> cv.RotatedRect(center, size, angle);</span><br><span class="line"><span class="keyword">let</span> rotatedRect = &#123;<span class="attr">center</span> : center, <span class="attr">size</span> : size, <span class="attr">angle</span> : angle&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过下面的方法获取方形的4个顶点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vertices = cv.RotatedRect.points(rotatedRect);</span><br><span class="line"><span class="keyword">let</span> point1 = vertices[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> point2 = vertices[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> point3 = vertices[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> point4 = vertices[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<p>通过下面的方法获取方形的边界：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> boundingRect = cv.RotatedRect.boundingRect(rotatedRect);</span><br></pre></td></tr></table></figure>
+</div></article></div><div class="right-container"><div class="widget"><div class="category"><h4>分类归档</h4><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/animation/">animation</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docs/">docs</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/图像处理/">图像处理</a><span class="category-list-count">9</span></li></ul></div></div><div class="widget"><div class="tagcloud"><h4>标签云</h4><a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/animation/" style="font-size: 14px;">animation</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/openCV/" style="font-size: 16px;">openCV</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/图像/" style="font-size: 18px;">图像</a></div></div><div class="widget"><div class="recent"><h4>最近文章</h4><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/图像处理/openCVjs图像处理之手动矫正/">openCVjs图像处理之手动矫正</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/前端使用openCV处理图片的基础/">前端使用openCV处理图片的基础</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/前端使用openCV之图片处理/">前端使用openCV之图片处理</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/卷积在前端图像处理上的应用/">卷积在前端图像处理上的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/canvas变换矩阵/">canvas变换矩阵</a></li></ul></div></div><div class="widget"><div id="arAnchorBar"></div></div></div></section></div><div class="right-menu"></div><div class="modal search-modal"><div class="input-field"><input type="text" id="search_input"><label for="search-input">搜索</label></div><div id="search_result" class="search-result"></div></div><div class="blog-overlay"></div><footer class="row"><div class="footer-con"><div class="paginator"><a href="/图像处理/openCVjs图像处理之手动矫正/" class="prev">上一篇</a><a href="/图像处理/前端使用openCV之图片处理/" class="next">下一篇</a></div><div class="copyright"><p>© 2018 - 2021 <a target="_blank">Lovelyun</a></p></div><div class="totop"><i></i></div></div></footer><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script src="https://apps.bdimg.com/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script><script src="/scripts/hit-kounter-lc-0.2.0.js"></script><script src="/scripts/arAnchor.js"></script><script src="/scripts/main.js"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
