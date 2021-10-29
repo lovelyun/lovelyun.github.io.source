@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/WebGL%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2021-10-29T03:24:27.800Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/openCVjs%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B9%8B%E8%87%AA%E5%8A%A8%E7%9F%AB%E6%AD%A3/</loc>
     
     <lastmod>2021-10-21T03:22:45.150Z</lastmod>
