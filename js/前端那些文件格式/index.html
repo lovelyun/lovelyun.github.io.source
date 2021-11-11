@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="简体中文"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="baidu-site-verification" content="1EB8XoOl0C"><meta name="google-site-verification" content="K7thEgdLm0UfRWJ5MGdF7sCcjClSzAlxFLPv2Oz5CGM"><title> 前端那些文件格式 · Lovelyun's blog</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="前端那些文件格式 - Lovelyun"><meta name="keywords" content="前端javescript node"><meta name="author" content="Lovelyun"><link rel="short icon" href="/images/favicon.ico"><link rel="stylesheet" href="/css/bubuzou.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Lovelyun's blog"></head><body><header><div class="header row"> <a href="/" class="logo-link"><img src="/images/logo.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" data-hover="博文" class="nav-list-link">博文</a></li><li class="nav-list-item"><a href="/archives/" target="_self" data-hover="归档" class="nav-list-link">归档</a></li></ul><div class="search"><a id="search_btn" href="#search"></a></div></div></header><div class="row scroll-con"><section class="container"><!-- for archive page--><div id="postAr" class="post"><article class="post-block"><h1 class="post-title">前端那些文件格式</h1><div class="post-info">2021-11-08<p class="visit"><i data-hk-page="current">-</i><span>次访问</span></p></div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 <code>Web</code> 开发中，当我们处理文件时（创建，上传，下载），经常会遇到二进制数据。另一个典型的应用场景是图像处理。<br>在 JavaScript 中有很多种二进制数据格式，比如<code>ArrayBuffer</code>，<code>Uint8Array</code>，<code>DataView</code>，<code>Blob</code>，<code>File</code> 等等，不过 <code>JavaScript</code> 中的二进制数据是以非标准方式实现的。</p>
+<p>下面我们来了解下这些数据格式及相互转换。<br>本文涉及到File,Blob,TypedArray,data url(Base64),blob url等等。</p>
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><p>首先，我们还是拿前文的例子来看，显示用户选择的图片。</p>
+<p>我们创建一个页面。提供选择图片功能。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"fileInput"</span> <span class="attr">name</span>=<span class="string">"选择图片"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap-image"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>选择图片后，需要将图片显示到canvas中，我们在上面的<code>script</code>标签中加入下面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="built_in">document</span>.getElementById(<span class="string">'fileInput'</span>)</span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>)</span><br><span class="line">fileInput.addEventListener(<span class="string">'change'</span>, (e) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> img = <span class="keyword">new</span> Image</span><br><span class="line">    <span class="keyword">const</span> file = e.target.files[<span class="number">0</span>]</span><br><span class="line">    img.src = URL.createObjectURL(file)</span><br><span class="line">    img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        canvas.width = img.width</span><br><span class="line">        canvas.height = img.height</span><br><span class="line">        <span class="keyword">const</span> context = canvas.getContext(<span class="string">'2d'</span>)</span><br><span class="line">        context.drawImage(img, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<p>选择一张图片后，change事件中获取到选择的文件<code>e.target.files[0]</code>：</p>
+<p><img src="/img/imageFormat/file.png" alt="file"></p>
+<p>File 对象是特殊类型的 Blob，可以用在任意的 Blob 类型的 context 中。<br>比如 <code>FileReader</code>, <code>URL.createObjectURL()</code>, <code>createImageBitmap()</code>, 及 <code>XMLHttpRequest.send()</code> 都能处理 Blob 和 File。<br>File 接口也继承了 Blob 接口的属性。上图的Prototype展开可以看到继承自Blob:</p>
+<p><img src="/img/imageFormat/file_prototype.png" alt="file_prototype"></p>
+<p>上面是最常见的file获取方式————从<code>&lt;input type=&quot;file&quot;&gt;</code>中获取。<br>此外，我们还可以用构造器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> File(fileParts, fileName, [options])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>fileParts —— Blob/BufferSource/String 类型值的数组</li>
+<li>fileName —— 文件名字符串</li>
+<li>options —— 可选对象：<ul>
+<li>lastModified —— 最后一次修改的时间戳（整数日期）</li>
+</ul>
+</li>
+</ul>
+<h3 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h3><p>FileReader 的用途是从 Blob（因此也从 File）对象中读取数据。<br>它使用事件来传递数据，因为从磁盘读取数据可能比较费时间。</p>
+<p>可以读取为3种格式：</p>
+<table>
+<thead>
+<tr>
+<th>读取方法</th>
+<th>目标格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>readAsArrayBuffer(blob)</td>
+<td>读取为二进制格式的 ArrayBuffer</td>
+</tr>
+<tr>
+<td>readAsText(blob, [encoding])</td>
+<td>读取为给定编码（默认为 utf-8 编码）的字符串</td>
+</tr>
+<tr>
+<td>readAsDataURL(blob)</td>
+<td>读取为 base64编码 的 data url</td>
+</tr>
+</tbody>
+</table>
+<p>比如将 Blob 读取为 base64：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.readAsDataURL(file) <span class="comment">// 将 Blob 读取为 base64</span></span><br></pre></td></tr></table></figure>
+<p>使用时选择哪一种，要看如何使用数据。</p>
+<p>读取过程中有下列事件：</p>
+<p>1、loadstart: 开始加载<br>2、progress: 在读取过程中出现<br>3、load: 读取完成，没有 error<br>4、abort: 调用了 abort()取消操作<br>5、error: 出现 error<br>6、loadend: 读取完成，无论成功还是失败</p>
+<p>使用最广泛的是load和error，比如下面的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">onchange</span>=<span class="string">"readFile(this)"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> readFile = <span class="function">(<span class="params">input</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> file = input.files[<span class="number">0</span>]</span></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader()</span></span><br><span class="line"><span class="undefined">  reader.readAsText(file)</span></span><br><span class="line"><span class="javascript">  reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(reader.result) <span class="comment">// 结果</span></span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  reader.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(reader.error) <span class="comment">// error</span></span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>不过大多数情况下，我们不需要读取Blob，通过网络发送一个File很容易，像 XMLHttpRequest 或 fetch 等 API 本身就接受 File 对象。或者用<code>URL.createObjectURL(file)</code> 创建一个短的 url，并将其赋给 <code>&lt;a&gt;</code> 或 <code>&lt;img&gt;</code>。这样，文件便可以下载文件或者将其呈现为图像，作为 canvas 等的一部分。</p>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>用<code>URL.createObjectURL</code>创建了一个url：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img.src = URL.createObjectURL(file)</span><br></pre></td></tr></table></figure>
+<p>这里，<code>URL.createObjectURL</code> 取一个 Blob，并为其创建一个唯一的 URL，形式为 <code>blob:&lt;origin&gt;/&lt;uuid&gt;</code>。<br>本例中创建的url如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blob:<span class="literal">null</span>/a05be8a9<span class="number">-78</span>b4<span class="number">-4470</span>-bdfe<span class="number">-5</span>fca427781c2</span><br></pre></td></tr></table></figure>
+<p>浏览器内部为每个通过 <code>URL.createObjectURL</code> 生成的URL存储了一个 <code>URL → Blob</code> 映射。可以通过URL访问 Blob。</p>
+<p>但 Blob 本身只保存在内存中的。浏览器无法释放它。<br>关闭页面时会自动释放内存中的Blob，也可以手动释放，通过<code>URL.revokeObjectURL(url)</code> 从内部映射中移除引用，Blob 被删除，并释放内存。</p>
+<p>映射被删除后该 URL 也就不再起作用了，也就无法通过URL再访问Blob。</p>
+<p>现在，我们了解了Blob作为URL的应用，那Blob到底是什么呢？</p>
+<p>Blob 由一个可选的字符串 type（通常是 MIME 类型）和 blobParts 组成，blobParts是 一系列其他 Blob 对象，字符串和 BufferSource。</p>
+<p><img src="/img/imageFormat/blob.svg" alt="blob"></p>
+<p>我们可以通过构造函数创建一个Blob：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Blob(blobParts, options)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>blobParts是 Blob/BufferSource/String 类型的值的数组。</li>
+<li>options 可选对象：<ul>
+<li>type： Blob 类型，通常是 MIME 类型，例如 image/png，</li>
+<li>endings：是否转换换行符，使 Blob 对应于当前操作系统的换行符（\r\n 或 \n）。默认为 “transparent”（啥也不做），不过也可以是 “native”（转换）。</li>
+</ul>
+</li>
+</ul>
+<p>比如从字符串创建 Blob：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：第一个参数必须是一个数组 [...]</span></span><br><span class="line"><span class="keyword">const</span> blob = <span class="keyword">new</span> Blob([<span class="string">'&lt;html&gt;…&lt;/html&gt;'</span>], &#123;<span class="attr">type</span>: <span class="string">'text/html'</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="图片-to-Blob"><a href="#图片-to-Blob" class="headerlink" title="图片 to Blob"></a>图片 to Blob</h3><p>图像操作是通过canvas来实现的：<br>1、使用 <code>canvas.drawImage</code> 在 canvas 上绘制图像（绘制后可以做一些图像处理，比如旋转、裁剪等等）；<br>2、调用 canvas 的 <code>toBlob(callback, format, quality)</code>方法 创建一个 Blob。</p>
+<p>比如，在上面的<code>context.drawImage(img, 0, 0);</code>后，我们把canvas转成Blob:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">canvas.toBlob(<span class="function">(<span class="params">blob</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'blob'</span>, blob)</span><br><span class="line">&#125;, <span class="string">'image/png'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/imageFormat/image_blob.png" alt="image_blob"></p>
+<p>或者，更喜欢同步的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">img.onload = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">  context.drawImage(img, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">const</span> blob = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> canvas.toBlob(resolve, <span class="string">'image/png'</span>))</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'blob'</span>, blob)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Blob-to-Base64"><a href="#Blob-to-Base64" class="headerlink" title="Blob to Base64"></a>Blob to Base64</h3><p><code>URL.createObjectURL</code> 的一个替代方法是，将 Blob 转换为 base64。<br>base64编码将二进制数据表示为一个由 0 到 64 的 ASCII 码组成的字符串，非常安全且可读。<br>我们可以在 <code>data-url</code> 中使用base64编码，<code>data-url</code>就像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</span><br></pre></td></tr></table></figure>
+<p>我们可以像常规url一样使用<code>data-url</code> 。<br>比如一张支持alpha透明度的webp的图片:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以用 FileReader 将 Blob 转换为 base64:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// img.src = URL.createObjectURL(file)</span></span><br><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.readAsDataURL(file) <span class="comment">// 将 Blob 转换为 base64 并调用 onload</span></span><br><span class="line"></span><br><span class="line">reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  img.src = reader.result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们可以从Blob创建2种url，一种是blob url，一种是data url，下面我们对比下这2种方式：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>blob url</th>
+<th>data url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建方式</td>
+<td>URL.createObjectURL</td>
+<td>FileReader</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>需手动撤销（revoke）</td>
+<td>无需操作</td>
+</tr>
+<tr>
+<td>访问</td>
+<td>直接访问 Blob，无需“编码/解码”</td>
+<td>对大的 Blob 进行编码时，性能和内存会有损耗</td>
+</tr>
+</tbody>
+</table>
+<p>所以要使用哪种url，需要具体情况再分析。</p>
+<h2 id="ArrayBuffer"><a href="#ArrayBuffer" class="headerlink" title="ArrayBuffer"></a>ArrayBuffer</h2><p>基本的二进制对象 <code>ArrayBuffer</code>是对固定长度的连续内存空间的引用，是一个内存区域，一个原始的二进制数据。</p>
+<p>我们可以这样创建一个长度为 16 的 buffer：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">16</span>); <span class="comment">// 创建一个长度为 16 的 buffer</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>注意：ArrayBuffer 和 Array 没有任何关系</li>
+</ul>
+</blockquote>
+<p>我们可以通过 FileReader 的 readAsArrayBuffer 读取 Blob 的二进制数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.readAsArrayBuffer(file)</span><br><span class="line">reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> buffer = reader.result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/imageFormat/arrayBuffer.png" alt="arrayBuffer"></p>
+<p>或者用Blob的arrayBuffer方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">await</span> file.arrayBuffer()</span><br></pre></td></tr></table></figure>
+<p>上面我们看到了Int8Array、Uint8Array、Int16Array，它们的通用术语是TypedArray，此外，还有其他的TypedArray。</p>
+<table>
+<thead>
+<tr>
+<th>TypedArray</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uint8Array，Uint16Array，Uint32Array</td>
+<td>用于 8、16 和 32 位的无符号整数</td>
+</tr>
+<tr>
+<td>Uint8ClampedArray</td>
+<td>用于 8 位整数，对于大于 255 的任何数字，它将保存为 255，对于任何负数，它将保存为 0</td>
+</tr>
+<tr>
+<td>Int8Array，Int16Array，Int32Array</td>
+<td>用于有符号整数（可以为负数）</td>
+</tr>
+<tr>
+<td>Float32Array，Float64Array</td>
+<td>用于 32 位和 64 位的有符号浮点数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在回顾一下：<br>1、<code>&lt;input type=&quot;file&quot;&gt;</code>是最常见的File获取方式;<br>2、File对象是特殊类型的 Blob;<br>3、Blob可以生成blob url;<br>4、FileReader可以读取Blob为3种格式，二进制格式的 ArrayBuffer，给定编码的字符串，base64编码的 data url;<br>5、blob url和data url都可以作为url使用;<br>6、Blob对象的arrayBuffer方法可以读取Blob的ArrayBuffer;<br>7、<code>canvas.toBlob(callback, format, quality)</code>可以把canvas读取为Blob;</p>
+<p>下图可以很直观的看到它们之间的相关转换关系：<br><img src="/img/imageFormat/transtorm.svg" alt="transtorm"></p>
+</div></article></div><div class="right-container"><div class="widget"><div class="category"><h4>分类归档</h4><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/animation/">animation</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docs/">docs</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/图像处理/">图像处理</a><span class="category-list-count">11</span></li></ul></div></div><div class="widget"><div class="tagcloud"><h4>标签云</h4><a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/animation/" style="font-size: 14px;">animation</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/openCV/" style="font-size: 16px;">openCV</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/图像/" style="font-size: 18px;">图像</a></div></div><div class="widget"><div class="recent"><h4>最近文章</h4><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/js/前端那些文件格式/">前端那些文件格式</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/WebGL入门/">WebGL及其图像处理入门</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/openCVjs图像处理之自动矫正/">openCVjs图像处理之自动矫正</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/openCVjs图像处理之手动矫正/">openCVjs图像处理之手动矫正</a></li><li class="post-list-item"><a class="post-list-link" href="/图像处理/前端使用openCV处理图片的基础/">前端使用openCV处理图片的基础</a></li></ul></div></div><div class="widget"><div id="arAnchorBar"></div></div></div></section></div><div class="right-menu"></div><div class="modal search-modal"><div class="input-field"><input type="text" id="search_input"><label for="search-input">搜索</label></div><div id="search_result" class="search-result"></div></div><div class="blog-overlay"></div><footer class="row"><div class="footer-con"><div class="paginator"><a href="/图像处理/WebGL入门/" class="next">NEXT</a></div><div class="copyright"><p>© 2018 - 2021 <a target="_blank">Lovelyun</a></p></div><div class="totop"><i></i></div></div></footer><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script src="https://apps.bdimg.com/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script><script src="/scripts/hit-kounter-lc-0.2.0.js"></script><script src="/scripts/arAnchor.js"></script><script src="/scripts/main.js"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
