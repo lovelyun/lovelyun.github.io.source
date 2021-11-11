@@ -82,3 +82,9 @@ deploy:
   repo: git@github.com:lovelyun/lovelyun.github.io.git
   branch: master
   message:
+
+archive_generator:
+  per_page: 0
+  yearly: false
+  monthly: false
+  daily: false
