@@ -320,7 +320,7 @@ const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
 1、告诉WebGL我们想从缓冲中提供数据。
 
 ```javascript
-gl.bindBuffer(gl.ARRAY_BUFFER, someBuffer);
+gl.enableVertexAttribArray(location);
 ```
 
 2、将缓冲绑定到 `ARRAY_BUFFER` 绑定点，它是WebGL内部的一个全局变量。
