@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>conda建立及管理虚拟环境</title>
+      <link href="/AI/conda%E5%BB%BA%E7%AB%8B%E5%8F%8A%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"/>
+      <url>/AI/conda%E5%BB%BA%E7%AB%8B%E5%8F%8A%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</url>
+      
+        <content type="html"><![CDATA[<p>前文我们安装了Anaconda，本文主要介绍如何利用conda建立及管理Python虚拟环境。</p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>开发python时，经常会需要不同的python版本以及不同的packages，如果你只需要使用特定的包，或者想要尝试不同的开发环境，但又不想彼此的开发环境受到影响，那么 Anaconda 的管理系统conda将是一个不错的方案。</p><p>conda命令是管理不同package时使用的，可以建立(create)、输出(export)、罗列(list)、删除(remove)和更新(update)环境中的包，还可以分享你的虚拟环境。</p><p>下面将通过5个步骤来说明conda如何建立及管理虚拟环境。</p><p><img src="/img/ai/conda_step.png" alt="conda_step.png"></p><h2 id="安装及更新"><a href="#安装及更新" class="headerlink" title="安装及更新"></a>安装及更新</h2><p>安装部分可参考前文<a href="https://lovelyun.github.io/AI/AI%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" target="_blank" rel="noopener">《AI入门之环境安装》</a>或<a href="https://docs.anaconda.com/anaconda/install/" target="_blank" rel="noopener">官网</a>，从开始菜单中打开Anaconda Prompt后，可以通过下列命令查看当前版本：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda -V</span><br><span class="line">conda --version</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_v.png" alt="conda_v.png"></p><p>通过下列命令更新：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure><h2 id="建立虚拟环境"><a href="#建立虚拟环境" class="headerlink" title="建立虚拟环境"></a>建立虚拟环境</h2><p>查看当前已安装的虚拟环境：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env list</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_env_list.png" alt="conda_env_list.png"></p><p>假设我们要建立一个叫myenv的虚拟环境，并且安装python 3.5的版本，我们可以执行下面的命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name myenv python=3.5</span><br></pre></td></tr></table></figure><p>安装完成后会出现下面的提示，提醒启动和关闭该环境的命令：</p><p><img src="/img/ai/env_down.png" alt="env_down.png"></p><p>这时，我们<code>conda env list</code>可以看到多了一个刚刚建立的虚拟环境myenv。</p><p><img src="/img/ai/conda_myenv.png" alt="conda_myenv.png"></p><h2 id="启动虚拟环境"><a href="#启动虚拟环境" class="headerlink" title="启动虚拟环境"></a>启动虚拟环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate myenv</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_env_activate.png" alt="conda_env_activate.png"></p><p>当前环境已经切换到myenv。<br>我们可以看到命令行最前面的括号内显示myenv，而且<code>conda env list</code>可以看到myenv后面有星号。</p><p>如果是Linux或者macOS，启动虚拟环境的命令将是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate myenv</span><br></pre></td></tr></table></figure><p>还可以通过下列命令看当前的虚拟环境安装了哪些东西：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_list.png" alt="conda_list.png"></p><p>如果要在当前环境安装新的包，比如安装numpy，那么只需要执行下列命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy</span><br></pre></td></tr></table></figure><h2 id="离开虚拟环境"><a href="#离开虚拟环境" class="headerlink" title="离开虚拟环境"></a>离开虚拟环境</h2><p>windows中可以执行下列命令关闭虚拟环境：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_deactivate.png" alt="conda_deactivate.png"></p><p>Linux或者macOS则是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate</span><br></pre></td></tr></table></figure><h2 id="删除虚拟环境或package"><a href="#删除虚拟环境或package" class="headerlink" title="删除虚拟环境或package"></a>删除虚拟环境或package</h2><p>删除myenv环境中的numpy包：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove --name myenv numpy</span><br></pre></td></tr></table></figure><p>如果要删除整个虚拟环境，比如删除上面创建的myenv，需要先deactivate关闭该环境，再执行下列命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove --name myenv</span><br></pre></td></tr></table></figure><p><img src="/img/ai/conda_env_remove.png" alt="conda_env_remove.png"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>为不同的需求建立独立的虚拟环境是个很好的习惯。<br>因为它不会影响其它的系统配置，如果某个版本出现了问题，可以很轻易的删除某个package，或者重新搭建虚拟环境。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>AI入门之环境安装</title>
       <link href="/AI/AI%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"/>
       <url>/AI/AI%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</url>
