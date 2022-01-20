@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/js/js%E6%A8%A1%E5%9D%97%E5%8C%96/</loc>
+    
+    <lastmod>2022-01-20T09:02:16.670Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/AI/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</loc>
     
-    <lastmod>2022-01-05T07:08:25.288Z</lastmod>
+    <lastmod>2022-01-05T07:26:19.597Z</lastmod>
     
   </url>
   
