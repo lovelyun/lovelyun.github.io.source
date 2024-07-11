@@ -1,0 +1,27 @@
+menu:
+  博文: /
+  归档: /archives/
+
+widgets:
+  - category
+  - tag
+  - archive
+
+# count
+show_count: true
+favicon: https://bubuzou.oss-cn-shenzhen.aliyuncs.com/blog/202010/favicon.ico
+
+# Comment
+#changyan: bubuzou
+leancloud:
+  appid: aD8jJBpu4oew3ovNY73z6Rdq-gzGzoHsz # 填写您的appid
+  appkey: FdzS5SOPHdhYQoEUngQ8K2QW # 填写您的appkey
+  comment: false # 是否开启评论系统
+  timer: false # 是否开启文章统计
+
+# Analytics
+# google-analytics:
+ga: UA-65933410-1
+
+# Copyright Infomation
+startyear: 2018

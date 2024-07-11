@@ -9,6 +9,7 @@ install:
   - node --version
   - npm --version
   - npm install
+  - npm ls --depth 0
   - npm install hexo-cli -g
 
 build_script:
