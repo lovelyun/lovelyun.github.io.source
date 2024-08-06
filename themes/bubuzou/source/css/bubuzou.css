@@ -16,7 +16,8 @@
 }
 :root {
 	--theme-bg-color: #24292e;
-	--theme-text-color: #41b883;
+	/* --theme-text-color: #41b883; */
+	--theme-text-color: rgb(90, 70, 185);
 }
 html {
     font-family: sans-serif;
@@ -385,15 +386,19 @@ header .nav-list-item .active { opacity: 0.7; }
 .home.post-list .post-content h6:before { content: ""; }
 
 .home.post-list .post-content > ul { list-style: initial; }
-
-.home.post-list .read-more { color: var(--theme-text-color); }
+.home.post-list .read-more {
+    /* color: var(--theme-text-color); */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
 
 .archive .archive-year {
 	font-family: Georgia, serif;
 	color: #aaa;
 }
 
-.archive .post-item { padding: 2px 0 0 50px; }
+.archive .post-item { padding: 2px 0 0 50px; display: flex;}
 
 .archive .post-time,
 .archive .post-title-link { font-size: 1rem; }
@@ -404,10 +409,26 @@ header .nav-list-item .active { opacity: 0.7; }
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #41b883;
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    position: relative;
 }
 
-.archive .post-title-link:hover { color: #168d58; }
+.archive .post-title-link::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #116AF0, #EB0050);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.archive .post-title-link:hover::after {
+    width: 100%;
+}
 
 .archive .post-info {
     float: left;
@@ -427,7 +448,11 @@ header .nav-list-item .active { opacity: 0.7; }
 
 .post .post-block .post-title {
     font-size: 22px;
-    color: var(--theme-text-color);
+    /* color: var(--theme-text-color); */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    display: inline-block;
 }
 
 .post-block .post-title a {
@@ -436,14 +461,18 @@ header .nav-list-item .active { opacity: 0.7; }
 }
 
 .post-block .post-title a:hover {
-	color: var(--theme-text-color);
-	animation: slideBorder 0.3s ease-in;
+	/* color: var(--theme-text-color); */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 .post-block .post-title a::after {
 	content: '';
     width: 0;
     height: 0;
-    border-bottom: 2px solid #41b883;
+    /* border-bottom: 2px solid #41b883; */
+    border-bottom: 2px solid;
+    border-image: linear-gradient(90deg, #116AF0, #EB0050) 2;
     position: absolute;
     left: 0;
 	bottom: -2px;
@@ -484,7 +513,10 @@ header .nav-list-item .active { opacity: 0.7; }
     font-size: 12px;
 }
 
-.post-block .post-info .post-from { background-color: #E36B6B; }
+.post-block .post-info .post-from {
+    /* background-color: #E36B6B; */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+}
 
 .post-block .post-info .post-demo { background-color: var(--theme-text-color); }
 
@@ -506,7 +538,10 @@ header .nav-list-item .active { opacity: 0.7; }
 
 .post-content a {
     word-break: break-all;
-    color: var(--theme-text-color);
+    /* color: var(--theme-text-color); */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 
 .post-content .tip {
@@ -1027,9 +1062,13 @@ footer .copyright a:hover { color: #666; }
 .widget { margin-bottom: 30px; }
 
 .widget h4 {
-    color: var(--theme-text-color);
+    /* color: var(--theme-text-color); */
+    background-image: linear-gradient(90deg, #116AF0, #EB0050);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
     margin: 10px 0;
     font-family: '微软雅黑';
+    display: inline-block;
 }
 
 .widget a { color: #333; }
@@ -1149,7 +1188,9 @@ footer .copyright a:hover { color: #666; }
     text-overflow: ellipsis;
 }
 
-.arCatalog-body dd.on a { color: var(--theme-text-color); }
+.arCatalog-body dd.on a {
+    color: var(--theme-text-color);
+}
 
 .arCatalog-body .arCatalog-tack1 .arCatalog-index {
     position: absolute;
@@ -1175,8 +1216,10 @@ footer .copyright a:hover { color: #666; }
     top: 8px;
     width: 12px;
     height: 12px;
-    background-color: #41b883;
-    box-shadow: 0px 0px 2px 2px rgba(65, 184, 131, 0.5);
+    /* background-color: #41b883; */
+    background-color: var(--theme-text-color);
+    /* box-shadow: 0px 0px 2px 2px rgba(65, 184, 131, 0.5); */
+    box-shadow: 0px 0px 2px 2px rgba(90, 70, 185, 0.5);
     border-radius: 2em;
     border-width: 0;
 }
